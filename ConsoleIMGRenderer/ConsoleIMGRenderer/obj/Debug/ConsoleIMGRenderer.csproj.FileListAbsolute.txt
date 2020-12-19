@@ -1,0 +1,9 @@
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.exe.config
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.exe
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.pdb
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csprojAssemblyReference.cache
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CoreCompileInputs.cache
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.exe
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.pdb
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\System.Drawing.Common.dll
+C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CopyComplete
