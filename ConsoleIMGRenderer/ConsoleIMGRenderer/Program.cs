@@ -18,6 +18,7 @@ namespace ConsoleIMGRenderer
         static FilterInfoCollection WebcamColl;
         static VideoCaptureDevice Device;
         static string FilePath = "NO_IMAGE";
+        public static Bitmap IMG;
 
         /// <summary>
         /// Main Method
@@ -26,6 +27,7 @@ namespace ConsoleIMGRenderer
         {
             Bitmap img = null;
             bool limited = false;
+            
 
             if (args.Length < 1 || args.Length > 3)
             {
@@ -38,25 +40,32 @@ namespace ConsoleIMGRenderer
                 if (File.Exists(args[0]))
                 {
                     img = new Bitmap(args[0]);
-                    double scaleFactor = img.Width / Console.WindowWidth;
                     img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
                 }
-                else if (args[0].ToLower() == "w")
+                else if (args[0].ToLower().Contains("w"))
                 {
                     WebcamColl = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                    Device = new VideoCaptureDevice(WebcamColl[0].MonikerString);
-                    Device.Start();
-                    Device.NewFrame += new NewFrameEventHandler(SaveImageToDisk);
+                    if (WebcamColl.Count > 0)
+                    {
+                        Device = new VideoCaptureDevice(WebcamColl[0].MonikerString);
+                        Device.Start();
+                        Device.NewFrame += new NewFrameEventHandler(SaveFrame);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Webcam Detected");
+                        return;
+                    }
 
-                    while(FilePath == "NO_IMAGE")
+                    while (IMG == null)
                     {
 
                     }
 
-                    img = new Bitmap(FilePath);
-                    double scaleFactor = img.Width / Console.WindowWidth;
+                    img = new Bitmap(IMG);
                     img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
                 }
+
                 if (args.Length >= 2)
                     limited = args[1] == "1" ? true : false;
             }
@@ -68,56 +77,120 @@ namespace ConsoleIMGRenderer
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
 
-            if (img != null)
-                for (int y = 0; y < img.Height; ++y)
+            if (args[0].ToLower() == "wc")
+            {
+                while(true)
                 {
-                    for (int x = 0; x < img.Width; ++x)
+                    for (int y = 0; y < img.Height; ++y)
                     {
-                        float colorness = img.GetPixel(x, y).GetBrightness();
-                        if (colorness > 0.98)
-                            Console.Write("@");
-                        else if (colorness > 0.95)
-                            Console.Write("W");
-                        else if (colorness > 0.9)
-                            Console.Write("#");
-                        else if (colorness > 0.85)
-                            Console.Write("M");
-                        else if (colorness > 0.8)
-                            Console.Write("B");
-                        else if (colorness > 0.75)
-                            Console.Write("N");
-                        else if (colorness > 0.7)
-                            Console.Write("Q");
-                        else if (colorness > 0.6)
-                            Console.Write("X");
-                        else if (colorness > 0.55)
-                            Console.Write("U");
-                        else if (colorness > 0.5)
-                            Console.Write("4");
-                        else if (colorness > 0.45)
-                            Console.Write("s");
-                        else if (colorness > 0.4)
-                            Console.Write("c");
-                        else if (colorness > 0.35)
-                            Console.Write("?");
-                        else if (colorness > 0.3)
-                            Console.Write("=");
-                        else if (colorness > 0.25)
-                            Console.Write("{");
-                        else if (colorness > 0.2)
-                            Console.Write("|");
-                        else if (colorness > 0.15)
-                            Console.Write("^");
-                        else if (colorness > 0.1)
-                            Console.Write(",");
-                        else
-                            Console.Write(".");
+                        for (int x = 0; x < img.Width; ++x)
+                        {
+                            float colorness = img.GetPixel(x, y).GetBrightness();
+                            if (colorness > 0.98)
+                                Console.Write("@");
+                            else if (colorness > 0.95)
+                                Console.Write("W");
+                            else if (colorness > 0.9)
+                                Console.Write("#");
+                            else if (colorness > 0.85)
+                                Console.Write("M");
+                            else if (colorness > 0.8)
+                                Console.Write("B");
+                            else if (colorness > 0.75)
+                                Console.Write("N");
+                            else if (colorness > 0.7)
+                                Console.Write("Q");
+                            else if (colorness > 0.6)
+                                Console.Write("X");
+                            else if (colorness > 0.55)
+                                Console.Write("U");
+                            else if (colorness > 0.5)
+                                Console.Write("4");
+                            else if (colorness > 0.45)
+                                Console.Write("s");
+                            else if (colorness > 0.4)
+                                Console.Write("c");
+                            else if (colorness > 0.35)
+                                Console.Write("?");
+                            else if (colorness > 0.3)
+                                Console.Write("=");
+                            else if (colorness > 0.25)
+                                Console.Write("{");
+                            else if (colorness > 0.2)
+                                Console.Write("|");
+                            else if (colorness > 0.15)
+                                Console.Write("^");
+                            else if (colorness > 0.1)
+                                Console.Write(",");
+                            else
+                                Console.Write(".");
 
-                        if (limited)
-                            Thread.Sleep(1000);
+                            if (limited)
+                                Thread.Sleep(1000);
+                        }
+                        Console.WriteLine();
                     }
-                    Console.WriteLine();
+                    Console.SetCursorPosition(0, 0);
+                    img = new Bitmap(IMG, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
                 }
+            }
+            else
+            {
+                if (img != null)
+                    for (int y = 0; y < img.Height; ++y)
+                    {
+                        for (int x = 0; x < img.Width; ++x)
+                        {
+                            float colorness = img.GetPixel(x, y).GetBrightness();
+                            if (colorness > 0.98)
+                                Console.Write("@");
+                            else if (colorness > 0.95)
+                                Console.Write("W");
+                            else if (colorness > 0.9)
+                                Console.Write("#");
+                            else if (colorness > 0.85)
+                                Console.Write("M");
+                            else if (colorness > 0.8)
+                                Console.Write("B");
+                            else if (colorness > 0.75)
+                                Console.Write("N");
+                            else if (colorness > 0.7)
+                                Console.Write("Q");
+                            else if (colorness > 0.6)
+                                Console.Write("X");
+                            else if (colorness > 0.55)
+                                Console.Write("U");
+                            else if (colorness > 0.5)
+                                Console.Write("4");
+                            else if (colorness > 0.45)
+                                Console.Write("s");
+                            else if (colorness > 0.4)
+                                Console.Write("c");
+                            else if (colorness > 0.35)
+                                Console.Write("?");
+                            else if (colorness > 0.3)
+                                Console.Write("=");
+                            else if (colorness > 0.25)
+                                Console.Write("{");
+                            else if (colorness > 0.2)
+                                Console.Write("|");
+                            else if (colorness > 0.15)
+                                Console.Write("^");
+                            else if (colorness > 0.1)
+                                Console.Write(",");
+                            else
+                                Console.Write(".");
+
+                            if (limited)
+                                Thread.Sleep(1000);
+                        }
+                        Console.WriteLine();
+                    }
+            }
+
+            Console.ForegroundColor = ConsoleColor.White;
+            if (args[0].ToLower().Contains("w"))
+                Device.SignalToStop();
         }
 
         /// <summary>
@@ -125,12 +198,12 @@ namespace ConsoleIMGRenderer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        static void SaveImageToDisk(object sender, NewFrameEventArgs eventArgs)
+        static void SaveFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Image img = (Bitmap)eventArgs.Frame.Clone();
-            FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"Image{DateTime.Now}.jpg");
-            img.Save(FilePath);
-            Device.SignalToStop();
+            IMG = (Bitmap)eventArgs.Frame.Clone();
+            //string imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"Image{DateTime.Now.Ticks}.jpg");
+            //img.Save(imagePath);
+            //FilePath = imagePath;
         }
     }
 }
