@@ -17,3 +17,10 @@ C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRendere
 C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CopyComplete
 C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.exe
 C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.pdb
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.dll
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.Video.DirectShow.dll
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.Video.dll
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.xml
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.Video.xml
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\AForge.Video.DirectShow.xml
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\System.Drawing.Common.xml

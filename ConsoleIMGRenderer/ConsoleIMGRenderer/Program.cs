@@ -1,8 +1,11 @@
 ﻿/// Autor : Sébastien Duruz
 /// Date : 18.12.2020
 
+using AForge.Video;
+using AForge.Video.DirectShow;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 
 namespace ConsoleIMGRenderer
@@ -12,6 +15,10 @@ namespace ConsoleIMGRenderer
     /// </summary>
     class Program
     {
+        static FilterInfoCollection WebcamColl;
+        static VideoCaptureDevice Device;
+        static string FilePath = "NO_IMAGE";
+
         /// <summary>
         /// Main Method
         /// </summary>
@@ -20,18 +27,37 @@ namespace ConsoleIMGRenderer
             Bitmap img = null;
             bool limited = false;
 
-            if (args.Length < 1 || args.Length > 2)
+            if (args.Length < 1 || args.Length > 3)
             {
-                Console.WriteLine("Not a valid parameter : path\\of\\the\\image.png");
+                Console.WriteLine("Not a valid parameter : path\\of\\the\\image.png || w for webcam picture");
                 Environment.Exit(0);
             }
 
             try
             {
-                img = new Bitmap(args[0]);
-                double scaleFactor = img.Width / Console.WindowWidth;
-                img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
-                if (args.Length == 2)
+                if (File.Exists(args[0]))
+                {
+                    img = new Bitmap(args[0]);
+                    double scaleFactor = img.Width / Console.WindowWidth;
+                    img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
+                }
+                else if (args[0].ToLower() == "w")
+                {
+                    WebcamColl = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                    Device = new VideoCaptureDevice(WebcamColl[0].MonikerString);
+                    Device.Start();
+                    Device.NewFrame += new NewFrameEventHandler(SaveImageToDisk);
+
+                    while(FilePath == "NO_IMAGE")
+                    {
+
+                    }
+
+                    img = new Bitmap(FilePath);
+                    double scaleFactor = img.Width / Console.WindowWidth;
+                    img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
+                }
+                if (args.Length >= 2)
                     limited = args[1] == "1" ? true : false;
             }
             catch (Exception ex)
@@ -40,7 +66,7 @@ namespace ConsoleIMGRenderer
             }
 
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
 
             if (img != null)
                 for (int y = 0; y < img.Height; ++y)
@@ -92,6 +118,19 @@ namespace ConsoleIMGRenderer
                     }
                     Console.WriteLine();
                 }
+        }
+
+        /// <summary>
+        /// Take a picture from webcam and save it to disc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        static void SaveImageToDisk(object sender, NewFrameEventArgs eventArgs)
+        {
+            Image img = (Bitmap)eventArgs.Frame.Clone();
+            FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"Image{DateTime.Now}.jpg");
+            img.Save(FilePath);
+            Device.SignalToStop();
         }
     }
 }
