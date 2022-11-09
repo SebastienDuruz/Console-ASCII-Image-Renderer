@@ -19,6 +19,7 @@ namespace ConsoleIMGRenderer
         static VideoCaptureDevice Device;
         static string FilePath = "NO_IMAGE";
         public static Bitmap IMG;
+        public static long PixelCounter = 0;
 
         /// <summary>
         /// Main Method
@@ -77,6 +78,7 @@ namespace ConsoleIMGRenderer
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
+            Console.CursorVisible = false;
 
             if (args[0].ToLower() == "wc")
             {
@@ -123,16 +125,20 @@ namespace ConsoleIMGRenderer
                                 Console.Write("^");
                             else if (colorness > 0.1)
                                 Console.Write(",");
-                            else
+                            else if(colorness > 0.05)
                                 Console.Write(".");
-
+                            else
+                                Console.Write(" ");
                             if (limited)
                                 Thread.Sleep(1000);
                         }
                         Console.WriteLine();
                     }
+                    PixelCounter += img.Width * img.Height;
+                    Console.Write($"Pixels {PixelCounter}");
                     Console.SetCursorPosition(0, 0);
                     img = new Bitmap(IMG, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
+
                 }
             }
             else
@@ -190,6 +196,8 @@ namespace ConsoleIMGRenderer
             }
 
             Console.ForegroundColor = ConsoleColor.White;
+            Console.CursorVisible = true;
+
             if (args[0].ToLower().Contains("w"))
                 Device.SignalToStop();
         }
