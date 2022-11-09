@@ -75,7 +75,8 @@ namespace ConsoleIMGRenderer
             }
 
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
 
             if (args[0].ToLower() == "wc")
             {
