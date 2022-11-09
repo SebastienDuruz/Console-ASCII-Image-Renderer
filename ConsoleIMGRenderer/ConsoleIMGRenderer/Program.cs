@@ -3,6 +3,7 @@
 
 using System;
 using System.Drawing;
+using System.Threading;
 
 namespace ConsoleIMGRenderer
 {
@@ -17,8 +18,9 @@ namespace ConsoleIMGRenderer
         static void Main(string[] args)
         {
             Bitmap img = null;
+            bool limited = false;
 
-            if(args.Length != 1)
+            if (args.Length < 1 || args.Length > 2)
             {
                 Console.WriteLine("Not a valid parameter : path\\of\\the\\image.png");
                 Environment.Exit(0);
@@ -27,105 +29,69 @@ namespace ConsoleIMGRenderer
             try
             {
                 img = new Bitmap(args[0]);
+                double scaleFactor = img.Width / Console.WindowWidth;
+                img = new Bitmap(img, new Size(Console.WindowWidth - 1, (int)(Console.WindowHeight - 1)));
+                if (args.Length == 2)
+                    limited = args[1] == "1" ? true : false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+
             if (img != null)
-            {
                 for (int y = 0; y < img.Height; ++y)
                 {
                     for (int x = 0; x < img.Width; ++x)
                     {
-                        Color color = img.GetPixel(x, y);
-                        int colorTemp = color.A + color.B + color.G;
-
-                        if (colorTemp > 730)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("█");
-                        }
-                        else if (colorTemp > 700)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("▓");
-                        }
-                        else if (colorTemp > 650)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("▒");
-                        }
-                        else if (colorTemp > 600)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
+                        float colorness = img.GetPixel(x, y).GetBrightness();
+                        if (colorness > 0.98)
+                            Console.Write("@");
+                        else if (colorness > 0.95)
+                            Console.Write("W");
+                        else if (colorness > 0.9)
                             Console.Write("#");
-                        }
-                        else if (colorTemp > 550)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("H");
-                        }
-                        else if (colorTemp > 500)
-                        {
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("O");
-                        }
-                        else if (colorTemp > 450)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.Write("#");
-                        }
-                        else if (colorTemp > 400)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.Write("H");
-                        }
-                        else if (colorTemp > 350)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.Write("O");
-                        }
-                        else if (colorTemp > 300)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.Write("C");
-                        }
-                        else if (colorTemp > 250)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write("O");
-                        }
-                        else if (colorTemp > 200)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write("C");
-
-                        }
-                        else if (colorTemp > 150)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write("i");
-                        }
-                        else if (colorTemp > 100)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write("*");
-                        }
-                        else if (colorTemp > 50)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Console.Write(".");
-                        }
+                        else if (colorness > 0.85)
+                            Console.Write("M");
+                        else if (colorness > 0.8)
+                            Console.Write("B");
+                        else if (colorness > 0.75)
+                            Console.Write("N");
+                        else if (colorness > 0.7)
+                            Console.Write("Q");
+                        else if (colorness > 0.6)
+                            Console.Write("X");
+                        else if (colorness > 0.55)
+                            Console.Write("U");
+                        else if (colorness > 0.5)
+                            Console.Write("4");
+                        else if (colorness > 0.45)
+                            Console.Write("s");
+                        else if (colorness > 0.4)
+                            Console.Write("c");
+                        else if (colorness > 0.35)
+                            Console.Write("?");
+                        else if (colorness > 0.3)
+                            Console.Write("=");
+                        else if (colorness > 0.25)
+                            Console.Write("{");
+                        else if (colorness > 0.2)
+                            Console.Write("|");
+                        else if (colorness > 0.15)
+                            Console.Write("^");
+                        else if (colorness > 0.1)
+                            Console.Write(",");
                         else
-                        {
-                            Console.Write(" ");
-                        }
+                            Console.Write(".");
+
+                        if (limited)
+                            Thread.Sleep(1000);
                     }
                     Console.WriteLine();
                 }
-            }
         }
     }
 }

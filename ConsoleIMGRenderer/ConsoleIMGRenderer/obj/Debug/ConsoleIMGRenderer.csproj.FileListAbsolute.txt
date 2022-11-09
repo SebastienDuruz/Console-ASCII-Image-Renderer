@@ -7,3 +7,13 @@ C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj
 C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.pdb
 C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\System.Drawing.Common.dll
 C:\Users\Sébastien\Documents\02-Perso\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CopyComplete
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.exe.config
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.exe
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\ConsoleIMGRenderer.pdb
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\bin\Debug\System.Drawing.Common.dll
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.AssemblyReference.cache
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.SuggestedBindingRedirects.cache
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CoreCompileInputs.cache
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.csproj.CopyComplete
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.exe
+C:\Users\d-dzs\Documents\07-PERSO\Console-ASCII-Image-Renderer\ConsoleIMGRenderer\ConsoleIMGRenderer\obj\Debug\ConsoleIMGRenderer.pdb
