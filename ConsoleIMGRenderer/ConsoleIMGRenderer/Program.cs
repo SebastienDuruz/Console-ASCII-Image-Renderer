@@ -27,7 +27,16 @@ namespace ConsoleIMGRenderer
         static void Main(string[] args)
         {
             Bitmap img = null;
-            bool limited = false;
+            int limited = 0;
+
+            if (args[0] == "help")
+            {
+                Console.WriteLine("Convert image or webcam stream into ASCII.");
+                Console.WriteLine("Parameters :");
+                Console.WriteLine("[ImageFilePath] || [w] || [wc] <--> The source of the image");
+                Console.WriteLine("[1]                            <--> Limit the nb of operation to 1 by sec");
+                Environment.Exit(0);
+            }
             
 
             if (args.Length < 1 || args.Length > 3)
@@ -68,7 +77,7 @@ namespace ConsoleIMGRenderer
                 }
 
                 if (args.Length >= 2)
-                    limited = args[1] == "1" ? true : false;
+                    limited = int.Parse(args[1]);
             }
             catch (Exception ex)
             {
@@ -129,8 +138,8 @@ namespace ConsoleIMGRenderer
                                 Console.Write(".");
                             else
                                 Console.Write(" ");
-                            if (limited)
-                                Thread.Sleep(1000);
+                            if (limited != 0)
+                                Thread.Sleep(1000 / limited);
                         }
                         Console.WriteLine();
                     }
@@ -188,8 +197,8 @@ namespace ConsoleIMGRenderer
                             else
                                 Console.Write(".");
 
-                            if (limited)
-                                Thread.Sleep(1000);
+                            if (limited != 0)
+                                Thread.Sleep(1000 / limited);
                         }
                         Console.WriteLine();
                     }
