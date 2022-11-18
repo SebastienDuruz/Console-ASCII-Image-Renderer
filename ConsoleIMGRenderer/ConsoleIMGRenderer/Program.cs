@@ -85,7 +85,7 @@ namespace ConsoleIMGRenderer
             }
 
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
 
